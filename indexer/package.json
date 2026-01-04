@@ -1,0 +1,10 @@
+{
+    "name": "dilithium-indexer",
+    "version": "1.0.0",
+    "description": "Indexer for Dilithium Coin to Supabase",
+    "main": "live_indexer.js",
+    "dependencies": {
+        "@supabase/supabase-js": "^2.39.0",
+        "axios": "^1.6.2"
+    }
+}

@@ -1,0 +1,51 @@
+:root {
+  --bg-deep: #030308;
+  --bg-card: rgba(10, 10, 20, 0.4);
+  --color-neon-cyan: #00f3ff;
+  --color-neon-purple: #bc13fe;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --blur-glass: 12px;
+}
+
+body {
+  background: radial-gradient(circle at 50% 0%, #1a1a2e 0%, var(--bg-deep) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif; /* Fallback, assumes Inter is loaded */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Utilities */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--blur-glass));
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+}
+
+.text-cyan {
+  color: var(--color-neon-cyan);
+}
+
+.text-purple {
+  color: var(--color-neon-purple);
+}
+
+.neon-glow {
+  text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
