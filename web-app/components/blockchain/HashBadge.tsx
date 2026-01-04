@@ -6,12 +6,27 @@ import clsx from 'clsx';
 export function HashBadge({ hash, className }: { hash: string; className?: string }) {
     const [copied, setCopied] = useState(false);
 
-    const copyToClipboard = (e: React.MouseEvent) => {
+    const copyToClipboard = async (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
-        navigator.clipboard.writeText(hash);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 1000);
+
+        try {
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(hash);
+            } else {
+                // Fallback for non-secure contexts
+                const textArea = document.createElement("textarea");
+                textArea.value = hash;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+            }
+            setCopied(true);
+            setTimeout(() => setCopied(false), 1000);
+        } catch (err) {
+            console.error('Failed to copy', err);
+        }
     };
 
     return (

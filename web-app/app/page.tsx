@@ -3,6 +3,7 @@ import { BlockFeed } from '@/components/blockchain/BlockFeed';
 import { TxFeed } from '@/components/blockchain/TxFeed';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { StatusOrb } from '@/components/ui/StatusOrb';
+import { TransactionChart } from '@/components/blockchain/TransactionChart';
 
 export const revalidate = 0; // Dynamic
 
@@ -54,6 +55,13 @@ export default async function Dashboard() {
         <GlassCard title="Supply">
           <div className="text-3xl font-bold text-neon-purple">{supply}</div>
         </GlassCard>
+      </div>
+
+
+
+      {/* Charts */}
+      <div className="w-full">
+        <TransactionChart />
       </div>
 
       {/* Main Feeds */}

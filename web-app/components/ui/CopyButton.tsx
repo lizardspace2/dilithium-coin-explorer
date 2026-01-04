@@ -8,7 +8,17 @@ export function CopyButton({ text, className }: { text: string; className?: stri
 
     const handleCopy = async () => {
         try {
-            await navigator.clipboard.writeText(text);
+            if (navigator.clipboard) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                // Fallback for non-secure contexts
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+            }
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
         } catch (err) {
