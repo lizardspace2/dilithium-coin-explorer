@@ -4,6 +4,8 @@ import { HashBadge } from '@/components/blockchain/HashBadge';
 import { formatBalance } from '@/lib/utils';
 import Link from 'next/link';
 import type { TxOutput } from '@/lib/types';
+import { ClientQRCode } from '@/components/ui/ClientQRCode';
+import { CopyButton } from '@/components/ui/CopyButton';
 
 interface OutputWithTx extends TxOutput {
     transactions: { block_index: number; timestamp: number; } | null; // Joined
@@ -11,19 +13,26 @@ interface OutputWithTx extends TxOutput {
 
 async function getAddressBalance(address: string) {
     try {
-        const NODE_URL = process.env.NODE_URL || 'http://localhost:3001';
-        const res = await fetch(`${NODE_URL}/address/${address}/balance`, { cache: 'no-store' });
+        const NODE_URL = process.env.NODE_URL || 'http://34.66.15.88:3001';
+        // The node returns { unspentTxOuts: [...] } at /address/:id
+        const res = await fetch(`${NODE_URL}/address/${address}`, { cache: 'no-store' });
         if (!res.ok) return null;
         const data = await res.json();
-        return data.balance;
+
+        // Calculate balance from UTXOs if balance is not provided directly
+        if (data.balance !== undefined) return data.balance;
+        if (Array.isArray(data.unspentTxOuts)) {
+            return data.unspentTxOuts.reduce((acc: number, out: any) => acc + out.amount, 0);
+        }
+        return 0;
     } catch (e) {
-        console.error('Failed to fetch balance from node', e);
+        console.warn('Node unavailable, displaying cached/empty data.');
         return null;
     }
 }
 
-export default async function AddressPage({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function AddressPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     // Fetch Balance from Node
     const balance = await getAddressBalance(id);
@@ -44,7 +53,10 @@ export default async function AddressPage({ params }: { params: { id: string } }
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <h1 className="text-2xl font-bold font-space text-gray-400">Address</h1>
-                    <div className="text-xl md:text-3xl font-mono break-all text-white">{id}</div>
+                    <div className="flex items-center gap-3">
+                        <div className="text-xl md:text-3xl font-mono break-all text-white">{id}</div>
+                        <CopyButton text={id} />
+                    </div>
                 </div>
             </div>
 
@@ -57,13 +69,8 @@ export default async function AddressPage({ params }: { params: { id: string } }
                 </GlassCard>
 
                 <GlassCard title="QR Code">
-                    <div className="flex justify-center items-center h-full">
-                        {/* Real QR code generation would go here */}
-                        <div className="w-32 h-32 bg-white p-2 rounded">
-                            <div className="w-full h-full bg-black/10 flex items-center justify-center text-xs text-black">
-                                [QR CODE]
-                            </div>
-                        </div>
+                    <div className="flex justify-center items-center h-full py-4">
+                        <ClientQRCode value={id} />
                     </div>
                 </GlassCard>
             </div>

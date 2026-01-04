@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrains.variable} ${space.variable} font-sans`}>
+      <body className={`${inter.variable} ${jetbrains.variable} ${space.variable} font-sans`} suppressHydrationWarning>
         <Header />
         {children}
       </body>

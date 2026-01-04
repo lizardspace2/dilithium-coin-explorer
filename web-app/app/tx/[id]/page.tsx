@@ -4,9 +4,10 @@ import { HashBadge } from '@/components/blockchain/HashBadge';
 import { timeAgo } from '@/lib/utils';
 import Link from 'next/link';
 import type { Transaction, TxInput, TxOutput } from '@/lib/types';
+import { CopyButton } from '@/components/ui/CopyButton';
 
-export default async function TxPage({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function TxPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     const { data: tx } = await supabase
         .from('transactions')
@@ -20,7 +21,10 @@ export default async function TxPage({ params }: { params: { id: string } }) {
         <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-8">
             <Link href="/" className="text-cyan hover:underline">← Back to Dashboard</Link>
 
-            <h1 className="text-2xl font-bold font-space break-all">TX: {tx.id}</h1>
+            <div className="flex items-center gap-3">
+                <h1 className="text-2xl font-bold font-space break-all">TX: {tx.id}</h1>
+                <CopyButton text={tx.id} />
+            </div>
 
             <GlassCard title="Details">
                 <div className="grid grid-cols-2 gap-4">

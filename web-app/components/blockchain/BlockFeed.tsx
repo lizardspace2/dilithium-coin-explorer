@@ -33,7 +33,12 @@ export function BlockFeed({ initialBlocks }: { initialBlocks: Block[] }) {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-xl font-bold font-space text-neon-blue mb-4">Latest Blocks</h2>
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold font-space text-neon-blue">Latest Blocks</h2>
+                <Link href="/blocks" className="text-sm text-gray-400 hover:text-white transition-colors">
+                    View All →
+                </Link>
+            </div>
             {blocks.map((block) => (
                 <div key={block.hash} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 border-l-2 border-l-transparent hover:border-l-neon-blue">
                     <div>

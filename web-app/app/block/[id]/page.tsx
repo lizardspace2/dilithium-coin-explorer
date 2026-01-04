@@ -4,8 +4,8 @@ import { HashBadge } from '@/components/blockchain/HashBadge';
 import { timeAgo } from '@/lib/utils';
 import Link from 'next/link';
 
-export default async function BlockPage({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function BlockPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     const { data: block } = await supabase
         .from('blocks')
