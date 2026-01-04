@@ -43,11 +43,9 @@ export function TxFeed({ initialTxs }: { initialTxs: Transaction[] }) {
             </div>
             {txs.map((tx) => (
                 <div key={tx.id} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 border-l-2 border-l-transparent hover:border-l-neon-purple">
-                    <div>
-                        <Link href={`/tx/${tx.id}`}>
-                            <HashBadge hash={tx.id} className="text-neon-blue font-bold hover:text-neon-purple transition-colors" />
-                        </Link>
-                    </div>
+                    <Link href={`/tx/${tx.id}`} className="font-mono text-neon-blue hover:text-neon-purple transition-colors">
+                        {tx.id.substring(0, 8)}...{tx.id.substring(tx.id.length - 8)}
+                    </Link>
                     <div className="text-right">
                         <div className="text-sm font-mono text-gray-400">Block #{tx.block_index}</div>
                         <div className="text-xs text-gray-500">{timeAgo(tx.timestamp)}</div>
