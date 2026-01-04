@@ -60,7 +60,7 @@ export function SearchBar() {
     };
 
     if (!open) return (
-        <button onClick={() => setOpen(true)} className="hidden md:flex items-center gap-2 text-sm text-gray-500 hover:text-cyan border border-white/10 px-3 py-1.5 rounded-full bg-white/5 transition-colors">
+        <button onClick={() => setOpen(true)} className="hidden md:flex items-center gap-2 text-sm text-gray-500 hover:text-neon-blue border border-white/10 px-3 py-1.5 rounded-full bg-white/5 transition-colors">
             <span>Search...</span>
             <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border border-white/10 bg-white/5 px-1.5 font-mono text-[10px] font-medium text-gray-400 opacity-100">
                 <span className="text-xs">Ctrl K</span>
@@ -76,7 +76,7 @@ export function SearchBar() {
                         autoFocus
                         type="text"
                         placeholder="Search blocks, txs, addresses..."
-                        className="w-full bg-[#0a0a1a] border border-cyan/30 text-white rounded-xl py-4 px-6 text-lg outline-none shadow-[0_0_20px_rgba(0,243,255,0.1)] focus:shadow-[0_0_30px_rgba(0,243,255,0.2)] placeholder:text-gray-600"
+                        className="w-full bg-[#0a0a1a] border border-neon-blue/30 text-white rounded-xl py-4 px-6 text-lg outline-none shadow-[0_0_20px_rgba(0,243,255,0.1)] focus:shadow-[0_0_30px_rgba(0,243,255,0.2)] placeholder:text-gray-600"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                     />

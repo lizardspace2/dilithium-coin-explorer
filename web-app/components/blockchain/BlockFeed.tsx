@@ -33,11 +33,11 @@ export function BlockFeed({ initialBlocks }: { initialBlocks: Block[] }) {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-xl font-bold font-space text-cyan mb-4">Latest Blocks</h2>
+            <h2 className="text-xl font-bold font-space text-neon-blue mb-4">Latest Blocks</h2>
             {blocks.map((block) => (
-                <div key={block.hash} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500">
+                <div key={block.hash} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 border-l-2 border-l-transparent hover:border-l-neon-blue">
                     <div>
-                        <Link href={`/block/${block.index}`} className="text-lg font-bold hover:text-cyan block">
+                        <Link href={`/block/${block.index}`} className="text-lg font-bold hover:text-neon-blue block">
                             #{block.index}
                         </Link>
                         <div className="text-xs text-gray-400 mt-1">
@@ -45,7 +45,7 @@ export function BlockFeed({ initialBlocks }: { initialBlocks: Block[] }) {
                         </div>
                     </div>
                     <div className="text-right">
-                        <div className="text-sm font-mono text-purple">{block.transaction_count} txs</div>
+                        <div className="text-sm font-mono text-neon-purple">{block.transaction_count} txs</div>
                         <div className="text-xs text-gray-500">{timeAgo(block.timestamp)}</div>
                     </div>
                 </div>

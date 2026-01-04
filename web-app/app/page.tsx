@@ -29,10 +29,10 @@ export default async function Dashboard() {
   return (
     <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-8">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h1 className="text-4xl font-bold font-space neon-glow">DILITHIUM NEXUS</h1>
-          <p className="text-text-secondary">Quantum Secure Blockchain Explorer</p>
+          <h1 className="text-4xl font-bold font-space neon-text text-white">DILITHIUM NEXUS</h1>
+          <p className="text-gray-400">Quantum Secure Blockchain Explorer</p>
         </div>
         <div className="flex items-center gap-2 glass-panel px-4 py-2">
           <span className="text-sm font-mono text-green-400">Mainnet Live</span>
@@ -41,7 +41,7 @@ export default async function Dashboard() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <GlassCard title="Block Height">
           <div className="text-3xl font-mono">{height}</div>
         </GlassCard>
@@ -49,10 +49,10 @@ export default async function Dashboard() {
           <div className="text-3xl font-mono">{difficulty}</div>
         </GlassCard>
         <GlassCard title="24h Txs">
-          <div className="text-3xl font-mono text-cyan">--</div>
+          <div className="text-3xl font-mono text-neon-blue">--</div>
         </GlassCard>
         <GlassCard title="Supply">
-          <div className="text-3xl font-bold text-purple">{supply}</div>
+          <div className="text-3xl font-bold text-neon-purple">{supply}</div>
         </GlassCard>
       </div>
 

@@ -3,9 +3,9 @@ const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 
 // --- CONFIGURATION ---
-const SUPABASE_URL = process.env.SUPABASE_URL || 'VOTRE_SUPABASE_URL_ICI';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || 'VOTRE_SERVICE_ROLE_KEY_ICI';
-const NODE_URL = process.env.NODE_URL || 'http://localhost:3001';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ugetaqllizziswruqdvm.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZXRhcWxsaXp6aXN3cnVxZHZtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzQ5Nzc5NSwiZXhwIjoyMDgzMDczNzk1fQ.zD6BftehXYd5IOYenK09_DmAspoeYz2Uu1DJC556C9I';
+const NODE_URL = process.env.NODE_URL || 'http://34.66.15.88:3001';
 const POLL_INTERVAL = 3000; // 3 seconds
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {

@@ -3,19 +3,19 @@ const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 
 // --- CONFIGURATION ---
-const SUPABASE_URL = process.env.SUPABASE_URL || 'VOTRE_SUPABASE_URL_ICI';
+const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ugetaqllizziswruqdvm.supabase.co';
 const SUPABASE_KEY = process.env.SUPABASE_KEY || 'VOTRE_SERVICE_ROLE_KEY_ICI'; // Clé secrète (backend)
-const NODE_URL = process.env.NODE_URL || 'http://localhost:3001';
+const NODE_URL = process.env.NODE_URL || 'http://34.66.15.88:3001';
 const BATCH_SIZE = 50; // Nombre de blocs par envoi (ajuster selon limites)
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-  auth: { persistSession: false }
+    auth: { persistSession: false }
 });
 
 async function run() {
     console.time('Importation');
     console.log('📡 Téléchargement de la blockchain complète depuis le nœud...');
-    
+
     try {
         // Attention : Si la chaîne est > 100MB, il faut utiliser un stream. 
         // Pour l'instant, on assume que ça tient en mémoire (< 500k blocs).
@@ -31,7 +31,7 @@ async function run() {
             const progress = Math.round(((i + batch.length) / allBlocks.length) * 100);
             process.stdout.write(`\r🚀 Progression : ${progress}% (${i + batch.length}/${allBlocks.length})`);
         }
-        
+
         console.log('\n✨ Importation terminée avec succès !');
         console.timeEnd('Importation');
 

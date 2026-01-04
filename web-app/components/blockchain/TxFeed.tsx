@@ -35,12 +35,12 @@ export function TxFeed({ initialTxs }: { initialTxs: Transaction[] }) {
 
     return (
         <div className="space-y-4">
-            <h2 className="text-xl font-bold font-space text-purple mb-4">Latest Transactions</h2>
+            <h2 className="text-xl font-bold font-space text-neon-purple mb-4">Latest Transactions</h2>
             {txs.map((tx) => (
-                <div key={tx.id} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500">
+                <div key={tx.id} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 border-l-2 border-l-transparent hover:border-l-neon-purple">
                     <div>
                         <Link href={`/tx/${tx.id}`}>
-                            <HashBadge hash={tx.id} className="text-cyan font-bold" />
+                            <HashBadge hash={tx.id} className="text-neon-blue font-bold hover:text-neon-purple transition-colors" />
                         </Link>
                     </div>
                     <div className="text-right">

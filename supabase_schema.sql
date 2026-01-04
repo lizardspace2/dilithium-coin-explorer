@@ -42,8 +42,10 @@ CREATE TABLE IF NOT EXISTS tx_outputs (
 
 -- 5. Index pour la performance
 CREATE INDEX IF NOT EXISTS idx_blocks_hash ON blocks(hash);
-CREATE INDEX IF NOT EXISTS idx_blocks_minter ON blocks(minter_address);
+-- CHANGE: Partial index for large Dilithium keys
+CREATE INDEX IF NOT EXISTS idx_blocks_minter ON blocks(substring(minter_address from 1 for 64));
 CREATE INDEX IF NOT EXISTS idx_tx_block_index ON transactions(block_index);
 CREATE INDEX IF NOT EXISTS idx_tx_inputs_txid ON tx_inputs(transaction_id);
 CREATE INDEX IF NOT EXISTS idx_tx_outputs_txid ON tx_outputs(transaction_id);
-CREATE INDEX IF NOT EXISTS idx_tx_outputs_address ON tx_outputs(address);
+-- CHANGE: Partial index for large Dilithium keys
+CREATE INDEX IF NOT EXISTS idx_tx_outputs_address ON tx_outputs(substring(address from 1 for 64));
