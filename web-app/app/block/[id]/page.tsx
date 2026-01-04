@@ -41,8 +41,12 @@ export default async function BlockPage({ params }: { params: Promise<{ id: stri
                             <HashBadge hash={block.prev_hash} />
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-gray-400">Minter</span>
-                            <HashBadge hash={block.minter_address} />
+                            <span className="text-gray-400">Merkle Root</span>
+                            <HashBadge hash={block.merkle_root || 'N/A'} />
+                        </div>
+                        <div className="flex justify-between">
+                            <span className="text-gray-400">Size</span>
+                            <span className="font-mono">{block.size ? `${block.size} bytes` : '---'}</span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-gray-400">Difficulty</span>

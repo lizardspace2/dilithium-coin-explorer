@@ -22,64 +22,34 @@ export function SearchBar() {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    const handleSearch = async (e: React.FormEvent) => {
+    const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         if (!query.trim()) return;
 
-        setLoading(true);
-        setError('');
         const q = query.trim();
+        setIsLoading(true); // UI feedback
 
-        try {
-            // 1. Check if Integer (Block Index)
-            if (/^\d+$/.test(q)) {
-                const { data: block } = await supabase.from('blocks').select('index').eq('index', parseInt(q)).single();
-                if (block) {
-                    router.push(`/block/${q}`);
-                    setOpen(false);
-                    return;
-                } else {
-                    setError(`Block #${q} not found.`);
-                    setLoading(false);
-                    return;
-                }
-            }
+        // Heuristics
+        const isNumber = /^\d+$/.test(q);
+        const isHash = /^[a-fA-F0-9]{64}$/.test(q);
 
-            // 2. Check if Length 64 (Hash)
-            if (q.length === 64) {
-                // Check Block Hash
-                const { data: block } = await supabase.from('blocks').select('index').eq('hash', q).single();
-                if (block) {
-                    router.push(`/block/${block.index}`);
-                    setOpen(false);
-                    return;
-                }
-
-                // Check Tx Hash
-                const { data: tx } = await supabase.from('transactions').select('id').eq('id', q).single();
-                if (tx) {
-                    router.push(`/tx/${q}`);
-                    setOpen(false);
-                    return;
-                }
-
-                setError('Hash not found in blocks or transactions.');
-                setLoading(false);
-                return;
-            }
-
-            // 3. Default to Address
-            // Addresses are wildly variable in length, so we just try it.
-            // Ideally we'd validte it against the node API, but for now we redirect.
+        // Routing
+        if (isNumber) {
+            router.push(`/block/${q}`);
+        } else if (isHash) {
+            // Assume Transactions for hashes usually, or try standard lookup
+            // For explorer UX, jumping to TX page is a safe default for 64-char hex
+            router.push(`/tx/${q}`);
+        } else {
+            // Assume Address for everything else
             router.push(`/address/${q}`);
-            setOpen(false);
-
-        } catch (err) {
-            console.error(err);
-            setError('An error occurred during search.');
-        } finally {
-            setLoading(false);
         }
+
+        // Reset state after navigation
+        setTimeout(() => {
+            setIsLoading(false);
+            setOpen(false);
+        }, 800);
     };
 
     if (!open) return (

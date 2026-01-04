@@ -36,6 +36,14 @@ export default async function TxPage({ params }: { params: Promise<{ id: string 
                         <span className="text-gray-400 block mb-1">Time</span>
                         <span className="font-mono">{timeAgo(tx.timestamp)}</span>
                     </div>
+                    <div>
+                        <span className="text-gray-400 block mb-1">Status</span>
+                        <span className="inline-block px-2 py-1 rounded bg-green-500/20 text-green-400 text-xs uppercase font-bold tracking-wider">Confirmed</span>
+                    </div>
+                    <div>
+                        <span className="text-gray-400 block mb-1">Fee</span>
+                        <span className="font-mono text-gray-300">{tx.fee ? `${tx.fee} DIL` : '0 DIL'}</span>
+                    </div>
                 </div>
             </GlassCard>
 

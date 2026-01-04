@@ -11,6 +11,8 @@ CREATE TABLE IF NOT EXISTS blocks (
     minter_address TEXT NOT NULL,
     minter_balance NUMERIC,
     transaction_count INTEGER DEFAULT 0,
+    merkle_root TEXT,
+    size INTEGER,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
@@ -19,6 +21,7 @@ CREATE TABLE IF NOT EXISTS transactions (
     id TEXT PRIMARY KEY,
     block_index BIGINT REFERENCES blocks(index) ON DELETE CASCADE,
     timestamp BIGINT NOT NULL,
+    fee NUMERIC,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

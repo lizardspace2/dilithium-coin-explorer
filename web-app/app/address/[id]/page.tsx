@@ -62,9 +62,19 @@ export default async function AddressPage({ params }: { params: Promise<{ id: st
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <GlassCard title="Portfolio">
-                    <div className="text-sm text-gray-400 mb-1">Current Balance</div>
-                    <div className="text-4xl font-bold font-space text-green-400">
-                        {balance !== null ? `${formatBalance(balance)} DIL` : '---'}
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <div className="text-sm text-gray-400 mb-1">Current Balance</div>
+                            <div className="text-2xl font-bold font-space text-green-400 break-all">
+                                {balance !== null ? `${formatBalance(balance)} DIL` : '---'}
+                            </div>
+                        </div>
+                        <div>
+                            <div className="text-sm text-gray-400 mb-1">Total Txs</div>
+                            <div className="text-2xl font-mono text-cyan-400">
+                                {outputTxs ? outputTxs.length : 0}
+                            </div>
+                        </div>
                     </div>
                 </GlassCard>
 

@@ -40,7 +40,9 @@ async function processBlock(block) {
         difficulty: block.difficulty,
         minter_address: block.minterAddress,
         minter_balance: block.minterBalance,
-        transaction_count: block.data.length
+        transaction_count: block.data.length,
+        merkle_root: block.merkleRoot,
+        size: JSON.stringify(block).length
     };
 
     const { error: errB } = await supabase.from('blocks').upsert(blockRow);
@@ -54,7 +56,8 @@ async function processBlock(block) {
         txRows.push({
             id: tx.id,
             block_index: block.index,
-            timestamp: block.timestamp
+            timestamp: block.timestamp,
+            fee: 0 // Placeholder as node doesn't provide fee info yet
         });
 
         tx.txIns.forEach(inn => {
