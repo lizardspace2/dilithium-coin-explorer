@@ -32,7 +32,7 @@ export function TransactionChart() {
 
             // Aggregate by Day
             const aggregated = blocks.reduce((acc, block) => {
-                const date = new Date(block.timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                const date = new Date(block.timestamp * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
                 acc[date] = (acc[date] || 0) + block.transaction_count;
                 return acc;
             }, {} as Record<string, number>);
