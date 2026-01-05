@@ -2,10 +2,15 @@ const { createClient } = require('@supabase/supabase-js');
 const axios = require('axios');
 
 // --- CONFIGURATION ---
-// Credentials from Environment or Fallback (Hardcoded for safety as per user request context)
-const SUPABASE_URL = process.env.SUPABASE_URL || 'https://ugetaqllizziswruqdvm.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZXRhcWxsaXp6aXN3cnVxZHZtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzQ5Nzc5NSwiZXhwIjoyMDgzMDczNzk1fQ.zD6BftehXYd5IOYenK09_DmAspoeYz2Uu1DJC556C9I';
+// Credentials from Environment
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_KEY;
 const NODE_URL = process.env.NODE_URL || 'http://34.66.15.88:3001';
+
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+    console.error('❌ Missing SUPABASE_URL or SUPABASE_KEY in environment variables.');
+    process.exit(1);
+}
 
 // GitHub Actions have ample time, but let's be efficient.
 const MAX_BLOCKS_TO_SYNC = 500; // Index up to 500 blocks per run
