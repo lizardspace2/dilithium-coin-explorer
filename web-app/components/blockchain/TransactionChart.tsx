@@ -30,17 +30,38 @@ export function TransactionChart() {
                 return;
             }
 
-            // Aggregate by Day
-            const aggregated = blocks.reduce((acc, block) => {
-                const date = new Date(block.timestamp * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-                acc[date] = (acc[date] || 0) + block.transaction_count;
-                return acc;
-            }, {} as Record<string, number>);
+            // 1. Prepare Last 7 Days structure (Keys)
+            const daysMap: Record<string, number> = {};
+            const dayKeys: string[] = [];
 
-            // Convert to array and reverse to show oldest first
-            const chartData = Object.entries(aggregated)
-                .map(([date, count]) => ({ date, count }))
-                .reverse();
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                daysMap[dateStr] = 0; // Initialize with 0
+                dayKeys.push(dateStr);
+            }
+
+            // 2. Filter and Aggregate Blocks
+            // Calculate timestamp for 7 days ago (roughly) to filter out very old blocks (optimization)
+            // But strict filtering happens via the date string match
+            const sevenDaysAgoSeconds = Math.floor(Date.now() / 1000) - (7 * 24 * 60 * 60);
+
+            blocks.forEach(block => {
+                if (block.timestamp < sevenDaysAgoSeconds) return;
+
+                const dateStr = new Date(block.timestamp * 1000).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+                // Only count if it falls within our generated last 7 days (handles edge cases)
+                if (daysMap[dateStr] !== undefined) {
+                    daysMap[dateStr] += block.transaction_count;
+                }
+            });
+
+            // 3. Map to Chart Data
+            const chartData = dayKeys.map(date => ({
+                date,
+                count: daysMap[date]
+            }));
 
             setData(chartData);
             setLoading(false);
