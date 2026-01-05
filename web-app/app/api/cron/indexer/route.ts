@@ -13,7 +13,10 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
 });
 
 export const dynamic = 'force-dynamic'; // Static generation won't work for cron
-export const maxDuration = 10; // 10 seconds timeout for Hobby plan (default)
+export const maxDuration = 60; // Increase to 60s (max for Hobby/Pro usually allows more but safe bet)
+
+const MAX_BLOCKS_PER_RUN = 5; // Reduced from 50 to 5 to avoid timeouts with large payloads
+
 
 export async function GET(request: NextRequest) {
     try {
@@ -137,22 +140,28 @@ async function sync() {
     const latestNodeBlock = allBlocks[allBlocks.length - 1];
 
     if (latestNodeBlock && latestNodeBlock.index > lastIndexedBlockIndex) {
-        // console.log(`New blocks detected! Node height: ${latestNodeBlock.index}, DB height: ${lastIndexedBlockIndex}`);
+        console.log(`[Indexer] New blocks detected! Node height: ${latestNodeBlock.index}, DB height: ${lastIndexedBlockIndex}`);
 
         // Sync missing blocks
-        // Limit to 50 blocks per run to avoid Vercel timeouts (10s default)
-        const MAX_BLOCKS_PER_RUN = 50;
+        // Limit to MAX_BLOCKS_PER_RUN blocks per run to avoid Vercel timeouts
         let count = 0;
 
         for (const block of allBlocks) {
             if (block.index > lastIndexedBlockIndex) {
-                if (count >= MAX_BLOCKS_PER_RUN) break;
+                if (count >= MAX_BLOCKS_PER_RUN) {
+                    console.log(`[Indexer] Reached batch limit of ${MAX_BLOCKS_PER_RUN}. Stopping run.`);
+                    break;
+                }
 
+                console.log(`[Indexer] Processing block ${block.index}...`);
                 await processBlock(block);
                 count++;
             }
         }
         blocksProcessed = count;
+        console.log(`[Indexer] processed ${blocksProcessed} blocks successfully.`);
+    } else {
+        console.log('[Indexer] No new blocks to sync.');
     }
 
     return {
