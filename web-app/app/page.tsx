@@ -27,9 +27,9 @@ export default async function Dashboard() {
   // Stats Logic
   const latestBlock = blocks?.[0];
   const height = latestBlock?.index || 0;
-  // Calculate Supply: ~50 coins per block * height (Rough estimation for MVP)
+  // Calculate Supply: 100M Pre-mine + ~50 coins per block * height
   // Accurate calc requires summing all coinbase txs, but we'll approximate:
-  const supply = `${(height * 50).toLocaleString()} DIL`;
+  const supply = `${(100000000 + (height * 50)).toLocaleString()} DIL`;
 
   const latestTimestamp = latestBlock?.timestamp || 0;
   const isLive = (Date.now() / 1000) - latestTimestamp < 600; // Live if block < 10 mins ago
@@ -57,6 +57,7 @@ export default async function Dashboard() {
       </div>
 
       {/* Stats Grid */}
+      {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <GlassCard title="Block Height">
           <div className="text-3xl font-mono text-cyan-400">#{height}</div>
@@ -68,8 +69,7 @@ export default async function Dashboard() {
               {isLive ? 'ONLINE' : 'STALLED'}
             </span>
           </div>
-          </div>
-          {(Date.now() / 1000) - latestTimestamp > 3600 && (
+          {(Date.now() / 1000) - latestTimestamp > 3600 && latestTimestamp > 0 && (
             <div className="text-xs text-red-500 mt-1">Last block: {timeAgo(latestTimestamp * 1000)}</div>
           )}
         </GlassCard>
@@ -79,17 +79,17 @@ export default async function Dashboard() {
         <GlassCard title="Total Supply">
           <div className="text-3xl font-bold text-neon-purple">{supply}</div>
         </GlassCard>
+      </div>
+
+
+
+      {/* Charts */}
+      < div className="w-full" >
+        <TransactionChart />
       </div >
 
-
-
-    {/* Charts */ }
-    < div className = "w-full" >
-      <TransactionChart />
-      </div >
-
-    {/* Main Feeds */ }
-    < div className = "grid grid-cols-1 lg:grid-cols-2 gap-8" >
+      {/* Main Feeds */}
+      < div className="grid grid-cols-1 lg:grid-cols-2 gap-8" >
         <BlockFeed initialBlocks={blocks || []} />
         <TxFeed initialTxs={txs || []} />
       </div >
