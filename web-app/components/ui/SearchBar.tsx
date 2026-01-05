@@ -27,7 +27,7 @@ export function SearchBar() {
         if (!query.trim()) return;
 
         const q = query.trim();
-        setIsLoading(true); // UI feedback
+        setLoading(true); // UI feedback
 
         // Heuristics
         const isNumber = /^\d+$/.test(q);
@@ -47,7 +47,7 @@ export function SearchBar() {
 
         // Reset state after navigation
         setTimeout(() => {
-            setIsLoading(false);
+            setLoading(false);
             setOpen(false);
         }, 800);
     };
