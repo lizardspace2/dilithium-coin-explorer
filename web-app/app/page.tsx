@@ -68,7 +68,10 @@ export default async function Dashboard() {
               {isLive ? 'ONLINE' : 'STALLED'}
             </span>
           </div>
-          <div className="text-xs text-gray-500 mt-1">Last block: {timeAgo(latestTimestamp)}</div>
+          </div>
+          {(Date.now() / 1000) - latestTimestamp > 3600 && (
+            <div className="text-xs text-red-500 mt-1">Last block: {timeAgo(latestTimestamp * 1000)}</div>
+          )}
         </GlassCard>
         <GlassCard title="Avg Block Time">
           <div className="text-3xl font-mono text-neon-blue">{avgBlockTime}s</div>
@@ -76,20 +79,20 @@ export default async function Dashboard() {
         <GlassCard title="Total Supply">
           <div className="text-3xl font-bold text-neon-purple">{supply}</div>
         </GlassCard>
-      </div>
+      </div >
 
 
 
-      {/* Charts */}
-      <div className="w-full">
-        <TransactionChart />
-      </div>
+    {/* Charts */ }
+    < div className = "w-full" >
+      <TransactionChart />
+      </div >
 
-      {/* Main Feeds */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    {/* Main Feeds */ }
+    < div className = "grid grid-cols-1 lg:grid-cols-2 gap-8" >
         <BlockFeed initialBlocks={blocks || []} />
         <TxFeed initialTxs={txs || []} />
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
