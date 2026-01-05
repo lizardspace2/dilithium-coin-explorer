@@ -1,0 +1,33 @@
+name: Blockchain Indexer
+
+on:
+  schedule:
+    - cron: '*/30 * * * *' # Run every 30 minutes
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60 # Set a generous timeout (GitHub allows up to 6h, but 60m is plenty)
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Indexer Dependencies
+        working-directory: ./indexer
+        run: npm ci
+
+      - name: Run Indexer Script
+        working-directory: ./indexer
+        env:
+          # Using secrets for best practice, though safe fallbacks exist in the script
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          NODE_URL: ${{ secrets.NODE_URL }}
+        run: node cron_script.js
