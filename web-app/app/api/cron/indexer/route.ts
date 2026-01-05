@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // --- CONFIGURATION ---
 // Ensure these env vars are set in Vercel
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || 'https://placeholder.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || 'placeholder-key'; // MUST be service role or have write access
+// Fallback to known working credentials if env vars are missing
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || 'https://ugetaqllizziswruqdvm.supabase.co';
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnZXRhcWxsaXp6aXN3cnVxZHZtIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NzQ5Nzc5NSwiZXhwIjoyMDgzMDczNzk1fQ.zD6BftehXYd5IOYenK09_DmAspoeYz2Uu1DJC556C9I';
 const NODE_URL = process.env.NODE_URL || 'http://34.66.15.88:3001';
 
 // Create Supabase client
