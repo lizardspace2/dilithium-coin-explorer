@@ -46,7 +46,7 @@ export default async function TransactionsPage({
                                 <tr key={tx.id} className="hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors">
                                     <td className="p-3">
                                         <Link href={`/tx/${tx.id}`}>
-                                            <HashBadge hash={tx.id} className="text-neon-blue hover:text-white" />
+                                            <HashBadge hash={tx.id} className="text-neon-blue hover:text-white" noCopy />
                                         </Link>
                                     </td>
                                     <td className="p-3">

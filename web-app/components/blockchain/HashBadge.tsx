@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { truncateHash } from '@/lib/utils';
 import clsx from 'clsx';
 
-export function HashBadge({ hash, className }: { hash: string; className?: string }) {
+export function HashBadge({ hash, className, noCopy = false }: { hash: string; className?: string; noCopy?: boolean }) {
     const [copied, setCopied] = useState(false);
 
     const copyToClipboard = async (e: React.MouseEvent) => {
+        if (noCopy) return; // Allow propagation if noCopy is true
         e.preventDefault();
         e.stopPropagation();
 
@@ -31,15 +32,16 @@ export function HashBadge({ hash, className }: { hash: string; className?: strin
 
     return (
         <span
-            onClick={copyToClipboard}
+            onClick={noCopy ? undefined : copyToClipboard}
             className={clsx(
-                "font-mono text-sm cursor-pointer transition-colors px-2 py-1 rounded inline-block",
-                copied ? "bg-green-500/20 text-green-400" : "bg-black/20 hover:neon-glow hover:text-cyan",
+                "font-mono text-sm transition-colors px-2 py-1 rounded inline-block",
+                noCopy ? "cursor-pointer hover:underline" : "cursor-pointer bg-black/20 hover:neon-glow hover:text-cyan",
+                copied && !noCopy ? "bg-green-500/20 text-green-400" : "",
                 className
             )}
-            title="Click to copy"
+            title={noCopy ? undefined : "Click to copy"}
         >
-            {copied ? "Copied!" : truncateHash(hash, 8, 8)}
+            {copied && !noCopy ? "Copied!" : truncateHash(hash, 8, 8)}
         </span>
     );
 }

@@ -66,7 +66,7 @@ export default async function TxPage({ params }: { params: Promise<{ id: string 
                             <div key={output.id || idx} className="p-2 bg-white/5 rounded flex justify-between items-center">
                                 <div className="truncate flex-1 mr-4">
                                     <Link href={`/address/${output.address}`}>
-                                        <HashBadge hash={output.address} />
+                                        <HashBadge hash={output.address} noCopy />
                                     </Link>
                                 </div>
                                 <div className="font-mono text-green-400">{output.amount} DIL</div>
