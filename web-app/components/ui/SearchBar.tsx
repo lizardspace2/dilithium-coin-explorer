@@ -22,34 +22,63 @@ export function SearchBar() {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    const handleSearch = (e: React.FormEvent) => {
+    const handleSearch = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!query.trim()) return;
 
         const q = query.trim();
         setLoading(true); // UI feedback
+        setError('');
 
-        // Heuristics
-        const isNumber = /^\d+$/.test(q);
-        const isHash = /^[a-fA-F0-9]{64}$/.test(q);
+        try {
+            // Heuristics
+            const isNumber = /^\d+$/.test(q);
+            const isHash = /^[a-fA-F0-9]{64}$/.test(q);
 
-        // Routing
-        if (isNumber) {
-            router.push(`/block/${q}`);
-        } else if (isHash) {
-            // Assume Transactions for hashes usually, or try standard lookup
-            // For explorer UX, jumping to TX page is a safe default for 64-char hex
-            router.push(`/tx/${q}`);
-        } else {
-            // Assume Address for everything else
-            router.push(`/address/${q}`);
-        }
+            if (isNumber) {
+                // Block Index
+                router.push(`/block/${q}`);
+            } else if (isHash) {
+                // Ambiguity: Could be Tx Hash, Block Hash, or Address
+                // check Transaction first (most common search)
+                const { data: tx } = await supabase
+                    .from('transactions')
+                    .select('id')
+                    .eq('id', q)
+                    .maybeSingle();
 
-        // Reset state after navigation
-        setTimeout(() => {
+                if (tx) {
+                    router.push(`/tx/${q}`);
+                } else {
+                    // Check Block Hash
+                    const { data: block } = await supabase
+                        .from('blocks')
+                        .select('index')
+                        .eq('hash', q)
+                        .maybeSingle();
+
+                    if (block) {
+                        router.push(`/block/${block.index}`);
+                    } else {
+                        // Fallback to Address
+                        router.push(`/address/${q}`);
+                    }
+                }
+            } else {
+                // Assume Address for everything else
+                router.push(`/address/${q}`);
+            }
+
+            // Reset state after navigation
+            setTimeout(() => {
+                setLoading(false);
+                setOpen(false);
+            }, 800);
+        } catch (err) {
+            console.error('Search failed', err);
+            setError('Search failed. Please try again.');
             setLoading(false);
-            setOpen(false);
-        }, 800);
+        }
     };
 
     if (!open) return (
