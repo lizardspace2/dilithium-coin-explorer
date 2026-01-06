@@ -7,7 +7,7 @@ export function Header() {
             <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-8">
                 <div className="flex items-center gap-8">
                     <Link href="/" className="font-bold text-xl font-space tracking-tight hover:text-neon-blue transition-colors">
-                        DILITHIUM<span className="text-neon-blue">NEXUS</span>
+                        QUANTIX<span className="text-neon-blue">EXPLORER</span>
                     </Link>
                     <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-400">
                         <Link href="/" className="hover:text-white transition-colors">Dashboard</Link>

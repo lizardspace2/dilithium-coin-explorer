@@ -66,7 +66,7 @@ export default async function AddressPage({ params }: { params: Promise<{ id: st
                         <div>
                             <div className="text-sm text-gray-400 mb-1">Current Balance</div>
                             <div className="text-2xl font-bold font-space text-green-400 break-all">
-                                {balance !== null ? `${formatBalance(balance)} DIL` : '---'}
+                                {balance !== null ? `${formatBalance(balance)} QTX` : '---'}
                             </div>
                         </div>
                         <div>

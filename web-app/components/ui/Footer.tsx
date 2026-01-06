@@ -6,7 +6,7 @@ export function Footer() {
         <footer className="border-t border-white/10 bg-black/20 text-gray-400 py-12">
             <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="space-y-4">
-                    <h3 className="text-white font-bold font-space text-lg">DILITHIUM<span className="text-neon-blue">NEXUS</span></h3>
+                    <h3 className="text-white font-bold font-space text-lg">QUANTIX<span className="text-neon-blue">EXPLORER</span></h3>
                     <p className="text-sm">
                         The next generation quantum-secure blockchain explorer.
                     </p>
@@ -40,7 +40,7 @@ export function Footer() {
                 </div>
             </div>
             <div className="max-w-7xl mx-auto px-8 mt-12 pt-8 border-t border-white/5 text-center text-xs text-gray-600">
-                &copy; {new Date().getFullYear()} Dilithium Nexus. All rights reserved.
+                &copy; {new Date().getFullYear()} Quantix Explorer. All rights reserved.
             </div>
         </footer>
     );

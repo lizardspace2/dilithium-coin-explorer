@@ -29,7 +29,7 @@ export default async function Dashboard() {
   const height = latestBlock?.index || 0;
   // Calculate Supply: 100M Pre-mine + ~50 coins per block * height
   // Accurate calc requires summing all coinbase txs, but we'll approximate:
-  const supply = `${(100000000 + (height * 50)).toLocaleString()} DIL`;
+  const supply = `${(100000000 + (height * 50)).toLocaleString()} QTX`;
 
   const latestTimestamp = latestBlock?.timestamp || 0;
   const isLive = (Date.now() / 1000) - latestTimestamp < 600; // Live if block < 10 mins ago
@@ -47,8 +47,8 @@ export default async function Dashboard() {
       {/* Header */}
       <div className="flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h1 className="text-4xl font-bold font-space neon-text text-white">DILITHIUM NEXUS</h1>
-          <p className="text-gray-400">Quantum Secure Blockchain Explorer</p>
+          <h1 className="text-4xl font-bold font-space neon-text text-white">QUANTIX EXPLORER</h1>
+          <p className="text-gray-400">Quantum Resistant Blockchain | Powered by Crystals-Dilithium</p>
         </div>
         <div className="flex items-center gap-2 glass-panel px-4 py-2">
           <span className="text-sm font-mono text-green-400">Mainnet Live</span>

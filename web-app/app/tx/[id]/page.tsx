@@ -42,7 +42,7 @@ export default async function TxPage({ params }: { params: Promise<{ id: string 
                     </div>
                     <div>
                         <span className="text-gray-400 block mb-1">Fee</span>
-                        <span className="font-mono text-gray-300">{tx.fee ? `${tx.fee} DIL` : '0 DIL'}</span>
+                        <span className="font-mono text-gray-300">{tx.fee ? `${tx.fee} QTX` : '0 QTX'}</span>
                     </div>
                 </div>
             </GlassCard>
@@ -69,7 +69,7 @@ export default async function TxPage({ params }: { params: Promise<{ id: string 
                                         <HashBadge hash={output.address} noCopy />
                                     </Link>
                                 </div>
-                                <div className="font-mono text-green-400">{output.amount} DIL</div>
+                                <div className="font-mono text-green-400">{output.amount} QTX</div>
                             </div>
                         ))}
                     </div>
