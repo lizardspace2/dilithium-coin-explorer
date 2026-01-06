@@ -51,7 +51,7 @@ export function BlockFeed({ initialBlocks }: { initialBlocks: Block[] }) {
                     </div>
                     <div className="text-right">
                         <div className="text-sm font-mono text-neon-purple">{block.transaction_count} txs</div>
-                        <div className="text-xs text-gray-500">{timeAgo(block.timestamp)}</div>
+                        <div className="text-xs text-gray-500">{timeAgo(block.timestamp * 1000)}</div>
                     </div>
                 </div>
             ))}

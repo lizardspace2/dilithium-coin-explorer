@@ -48,7 +48,7 @@ export function TxFeed({ initialTxs }: { initialTxs: Transaction[] }) {
                     </Link>
                     <div className="text-right">
                         <div className="text-sm font-mono text-gray-400">Block #{tx.block_index}</div>
-                        <div className="text-xs text-gray-500">{timeAgo(tx.timestamp)}</div>
+                        <div className="text-xs text-gray-500">{timeAgo(tx.timestamp * 1000)}</div>
                     </div>
                 </div>
             ))}

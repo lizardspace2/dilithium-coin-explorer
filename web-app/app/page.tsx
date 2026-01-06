@@ -66,7 +66,7 @@ export default async function Dashboard() {
           <div className="flex items-center gap-2">
             <StatusOrb status={isLive ? 'active' : 'inactive'} />
             <span className={`text-2xl font-bold ${isLive ? 'text-green-400' : 'text-red-400'}`}>
-              {isLive ? 'ONLINE' : 'STALLED'}
+              {isLive ? 'ONLINE' : 'LAST UPDATE'}
             </span>
           </div>
           {(Date.now() / 1000) - latestTimestamp > 3600 && latestTimestamp > 0 && (

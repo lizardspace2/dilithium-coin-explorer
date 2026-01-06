@@ -57,7 +57,7 @@ export default async function BlocksPage({
                                         {block.transaction_count}
                                     </td>
                                     <td className="p-3 text-gray-500">
-                                        {timeAgo(block.timestamp)}
+                                        {timeAgo(block.timestamp * 1000)}
                                     </td>
                                 </tr>
                             ))}

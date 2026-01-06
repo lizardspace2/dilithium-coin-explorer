@@ -26,7 +26,7 @@ export default async function BlockPage({ params }: { params: Promise<{ id: stri
 
             <div className="flex justify-between items-center">
                 <h1 className="text-4xl font-bold font-space">Block #{block.index}</h1>
-                <div className="text-gray-400">{timeAgo(block.timestamp)}</div>
+                <div className="text-gray-400">{timeAgo(block.timestamp * 1000)}</div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -72,7 +72,7 @@ export default async function BlockPage({ params }: { params: Promise<{ id: stri
                             <Link href={`/tx/${tx.id}`} className="text-cyan font-mono hover:neon-glow">
                                 {tx.id}
                             </Link>
-                            <span className="text-sm text-gray-500">{timeAgo(tx.timestamp)}</span>
+                            <span className="text-sm text-gray-500">{timeAgo(tx.timestamp * 1000)}</span>
                         </div>
                     ))}
                     {(!txs || txs.length === 0) && <div className="text-gray-500 italic">No transactions</div>}

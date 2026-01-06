@@ -34,7 +34,7 @@ export default async function TxPage({ params }: { params: Promise<{ id: string 
                     </div>
                     <div>
                         <span className="text-gray-400 block mb-1">Time</span>
-                        <span className="font-mono">{timeAgo(tx.timestamp)}</span>
+                        <span className="font-mono">{timeAgo(tx.timestamp * 1000)}</span>
                     </div>
                     <div>
                         <span className="text-gray-400 block mb-1">Status</span>
