@@ -1,6 +1,6 @@
-# Dilithium Nexus Explorer
+# Quantix Explorer
 
-The official "Quantum Resistant" Blockchain Explorer for Dilithium Coin.
+The official "Quantum Resistant" Blockchain Explorer for Quantix Coin.
 Built with Next.js 14, Supabase, and a Cyberpunk/Glassmorphism design system.
 
 ## Features

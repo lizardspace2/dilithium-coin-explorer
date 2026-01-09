@@ -1,3 +1,10 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
+
 export function truncateHash(hash: string, startLength = 6, endLength = 4) {
     if (!hash) return '';
     if (hash.length <= startLength + endLength) return hash;

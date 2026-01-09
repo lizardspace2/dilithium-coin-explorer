@@ -4,17 +4,17 @@ import { StatCard } from "@/components/blockchain/StatCard";
 import { BlockList } from "@/components/blockchain/BlockList";
 import { TransactionList } from "@/components/blockchain/TransactionList";
 import { GlassCard } from "@/components/blockchain/GlassCard";
-import { 
-  mockBlocks, 
-  mockTransactions, 
-  mockNetworkStats, 
-  formatNumber 
+import {
+  mockBlocks,
+  mockTransactions,
+  mockNetworkStats,
+  formatNumber
 } from "@/lib/mockData";
-import { 
-  Layers, 
-  Gauge, 
-  ArrowRightLeft, 
-  Coins, 
+import {
+  Layers,
+  Gauge,
+  ArrowRightLeft,
+  Coins,
   Shield,
   Zap
 } from "lucide-react";
@@ -25,7 +25,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 container mx-auto px-4 py-8">
         {/* Hero Section */}
         <div className="mb-12 text-center">
@@ -33,14 +33,14 @@ const Index = () => {
             <Shield className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium text-primary">Quantum-Resistant Security</span>
           </div>
-          
+
           <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-            <span className="neon-text">Dilithium</span>{" "}
+            <span className="neon-text">Quantix</span>{" "}
             <span className="text-foreground">Nexus Explorer</span>
           </h1>
-          
+
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Explore the quantum-resistant blockchain. Track blocks, transactions, 
+            Explore the quantum-resistant blockchain. Track blocks, transactions,
             and addresses in real-time.
           </p>
         </div>

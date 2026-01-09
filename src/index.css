@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Dilithium Nexus - Cyberpunk Theme */
+    /* Quantix Nexus - Cyberpunk Theme */
     --background: 240 50% 3%;
     --foreground: 220 20% 90%;
 
@@ -37,15 +37,15 @@
 
     --radius: 0.75rem;
 
-    /* Custom Dilithium colors */
+    /* Custom Quantix colors */
     --neon-cyan: 185 100% 50%;
     --neon-purple: 280 100% 53%;
     --neon-green: 150 100% 50%;
     --neon-pink: 330 100% 60%;
-    
+
     --glass-bg: 240 40% 6%;
     --glass-border: 220 20% 90%;
-    
+
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(185 100% 50%) 0%, hsl(280 100% 53%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(240 40% 8%) 0%, hsl(240 50% 4%) 100%);
@@ -66,26 +66,28 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    background: 
+    background:
       radial-gradient(ellipse at 50% 0%, hsl(280 100% 53% / 0.08) 0%, transparent 50%),
       radial-gradient(ellipse at 80% 80%, hsl(185 100% 50% / 0.05) 0%, transparent 40%),
       hsl(var(--background));
     min-height: 100vh;
   }
 
-  code, .mono {
+  code,
+  .mono {
     font-family: 'JetBrains Mono', monospace;
   }
 }
 
 @layer components {
+
   /* Glassmorphism Card */
   .glass-card {
     @apply rounded-xl border;
     background: hsl(var(--glass-bg) / 0.6);
     border-color: hsl(var(--glass-border) / 0.08);
     backdrop-filter: blur(16px);
-    box-shadow: 
+    box-shadow:
       0 0 0 1px hsl(var(--glass-border) / 0.05) inset,
       0 20px 50px -15px hsl(240 50% 3% / 0.5);
   }
@@ -96,7 +98,7 @@
 
   .glass-card-hover:hover {
     border-color: hsl(var(--neon-cyan) / 0.3);
-    box-shadow: 
+    box-shadow:
       0 0 0 1px hsl(var(--neon-cyan) / 0.1) inset,
       0 0 30px -10px hsl(var(--neon-cyan) / 0.3),
       0 20px 50px -15px hsl(240 50% 3% / 0.5);
@@ -105,14 +107,14 @@
   /* Neon Text Effects */
   .neon-text {
     color: hsl(var(--neon-cyan));
-    text-shadow: 
+    text-shadow:
       0 0 10px hsl(var(--neon-cyan) / 0.5),
       0 0 30px hsl(var(--neon-cyan) / 0.3);
   }
 
   .neon-text-purple {
     color: hsl(var(--neon-purple));
-    text-shadow: 
+    text-shadow:
       0 0 10px hsl(var(--neon-purple) / 0.5),
       0 0 30px hsl(var(--neon-purple) / 0.3);
   }
@@ -177,10 +179,13 @@
 
 @layer utilities {
   @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
       transform: scale(1);
     }
+
     50% {
       opacity: 0.7;
       transform: scale(1.1);
@@ -192,6 +197,7 @@
       opacity: 0;
       transform: translateY(-10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -203,6 +209,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -214,6 +221,7 @@
       opacity: 0;
       transform: translateY(10px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);

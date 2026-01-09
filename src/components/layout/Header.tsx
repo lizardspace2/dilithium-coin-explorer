@@ -23,11 +23,11 @@ export const Header = () => {
             <div className="relative">
               <Hexagon className="w-8 h-8 text-primary transition-all group-hover:drop-shadow-[0_0_10px_hsl(var(--primary))]" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xs font-bold text-primary">D</span>
+                <span className="text-xs font-bold text-primary">Q</span>
               </div>
             </div>
             <div className="hidden sm:block">
-              <span className="font-bold text-lg tracking-tight">Dilithium</span>
+              <span className="font-bold text-lg tracking-tight">Quantix</span>
               <span className="text-xs block text-muted-foreground -mt-0.5">NEXUS EXPLORER</span>
             </div>
           </Link>
@@ -50,9 +50,9 @@ export const Header = () => {
           <div className="flex items-center gap-4">
             <SearchBar className="hidden lg:block w-80" />
             <StatusOrb status="online" size="sm" />
-            
+
             {/* Mobile Menu Button */}
-            <button 
+            <button
               className="md:hidden p-2 rounded-lg hover:bg-muted/50"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >

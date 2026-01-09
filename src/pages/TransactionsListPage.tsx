@@ -10,7 +10,7 @@ const TransactionsListPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="flex items-center gap-4 mb-8">
           <div className="p-3 rounded-xl bg-primary/10">
@@ -19,7 +19,7 @@ const TransactionsListPage = () => {
           <div>
             <h1 className="text-3xl font-bold">Transactions</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Browse all transactions on the Dilithium network
+              Browse all transactions on the Quantix network
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@ const TransactionsListPage = () => {
             <div className="col-span-2">Value</div>
             <div className="col-span-2 text-right">Age</div>
           </div>
-          
+
           {/* Table Body */}
           <div className="divide-y divide-border/30">
             {mockTransactions.slice(0, 50).map((tx) => (
@@ -56,10 +56,10 @@ const TransactionsListPage = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Block */}
                 <div className="md:col-span-2 hidden md:block">
-                  <Link 
+                  <Link
                     to={`/block/${tx.blockIndex}`}
                     className="text-primary hover:underline"
                     onClick={(e) => e.stopPropagation()}
@@ -67,21 +67,21 @@ const TransactionsListPage = () => {
                     #{tx.blockIndex}
                   </Link>
                 </div>
-                
+
                 {/* Inputs/Outputs */}
                 <div className="md:col-span-2 hidden md:flex items-center gap-2 text-sm text-muted-foreground">
                   <span>{tx.inputs.length} in</span>
                   <ArrowRight className="w-3 h-3" />
                   <span>{tx.outputs.length} out</span>
                 </div>
-                
+
                 {/* Value */}
                 <div className="md:col-span-2 hidden md:block">
                   <span className="font-mono text-sm font-medium text-neon-green">
                     {formatDIL(getTotalValue(tx))}
                   </span>
                 </div>
-                
+
                 {/* Age */}
                 <div className="md:col-span-2 hidden md:flex justify-end items-center gap-2">
                   <span className="text-sm text-muted-foreground">

@@ -10,36 +10,36 @@ export const Footer = () => {
             <div className="relative">
               <Hexagon className="w-6 h-6 text-primary/50" />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[10px] font-bold text-primary/50">D</span>
+                <span className="text-[10px] font-bold text-primary/50">Q</span>
               </div>
             </div>
             <span className="text-sm text-muted-foreground">
-              © 2025 Dilithium Network. Quantum-Resistant Blockchain.
+              © 2026 Quantix Network. Quantum-Resistant Blockchain.
             </span>
           </div>
 
           <div className="flex items-center gap-6">
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               Documentation
             </Link>
-            <Link 
-              to="/" 
+            <Link
+              to="/"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               API
             </Link>
             <div className="flex items-center gap-3">
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="p-2 rounded-lg hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="w-4 h-4" />
               </a>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="p-2 rounded-lg hover:bg-muted/50 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Twitter className="w-4 h-4" />

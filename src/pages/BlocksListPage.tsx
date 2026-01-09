@@ -10,7 +10,7 @@ const BlocksListPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="flex items-center gap-4 mb-8">
           <div className="p-3 rounded-xl bg-neon-purple/10">
@@ -19,7 +19,7 @@ const BlocksListPage = () => {
           <div>
             <h1 className="text-3xl font-bold">Blocks</h1>
             <p className="text-sm text-muted-foreground mt-1">
-              Browse all minted blocks on the Dilithium network
+              Browse all minted blocks on the Quantix network
             </p>
           </div>
         </div>
@@ -34,7 +34,7 @@ const BlocksListPage = () => {
             <div className="col-span-1">Diff</div>
             <div className="col-span-2 text-right">Age</div>
           </div>
-          
+
           {/* Table Body */}
           <div className="divide-y divide-border/30">
             {mockBlocks.map((block) => (
@@ -55,27 +55,27 @@ const BlocksListPage = () => {
                     </p>
                   </div>
                 </div>
-                
+
                 {/* Hash */}
                 <div className="md:col-span-3 hidden md:block">
                   <HashBadge hash={block.hash} type="block" chars={8} />
                 </div>
-                
+
                 {/* Minter */}
                 <div className="md:col-span-3 hidden md:block">
                   <HashBadge hash={block.minterAddress} type="address" chars={8} />
                 </div>
-                
+
                 {/* Txs */}
                 <div className="md:col-span-1 hidden md:block">
                   <span className="text-sm">{block.transactionCount}</span>
                 </div>
-                
+
                 {/* Difficulty */}
                 <div className="md:col-span-1 hidden md:block">
                   <span className="text-sm">{block.difficulty}</span>
                 </div>
-                
+
                 {/* Age */}
                 <div className="md:col-span-2 hidden md:flex justify-end items-center gap-2">
                   <span className="text-sm text-muted-foreground">
