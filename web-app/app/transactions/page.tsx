@@ -26,68 +26,77 @@ export default async function TransactionsPage({
     const totalPages = count ? Math.ceil(count / pageSize) : 0;
 
     return (
-        <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-8">
-            <div className="flex justify-between items-center">
-                <h1 className="text-4xl font-bold font-space text-white">Transactions</h1>
+        <div className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto space-y-8 pb-24">
+            <div className="flex justify-between items-center animate-fade-in">
+                <div>
+                    <h1 className="text-4xl font-bold font-space text-white mb-2">Transactions</h1>
+                    <p className="text-gray-400">View recent activity on the quantum ledger.</p>
+                </div>
+                <div className="hidden md:block text-right">
+                    <div className="text-xs text-gray-500 uppercase tracking-wider font-mono">Total Txs</div>
+                    <div className="text-2xl font-mono text-neon-purple">{count ? count.toLocaleString() : '...'}</div>
+                </div>
             </div>
 
-            <GlassCard title={`Latest Transactions (Page ${page})`}>
-                <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                        <thead>
-                            <tr className="border-b border-white/10 text-gray-400 text-sm">
-                                <th className="p-3 font-medium">Tx Hash</th>
-                                <th className="p-3 font-medium">Block</th>
-                                <th className="p-3 font-medium">Time</th>
-                            </tr>
-                        </thead>
-                        <tbody className="text-sm">
-                            {txs?.map((tx) => (
-                                <tr key={tx.id} className="hover:bg-white/5 border-b border-white/5 last:border-0 transition-colors">
-                                    <td className="p-3">
-                                        <Link href={`/tx/${tx.id}`}>
-                                            <HashBadge hash={tx.id} className="text-neon-blue hover:text-white" noCopy />
-                                        </Link>
-                                    </td>
-                                    <td className="p-3">
-                                        <Link href={`/block/${tx.block_index}`} className="text-purple hover:underline font-mono">
-                                            #{tx.block_index}
-                                        </Link>
-                                    </td>
-                                    <td className="p-3 text-gray-500">
-                                        {timeAgo(tx.timestamp * 1000)}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+            <div className="glass-panel p-1 animate-slide-up" style={{ animationDelay: '0.1s' }}>
+                {/* Header Row */}
+                <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-white/10 text-xs text-gray-400 uppercase tracking-wider font-medium">
+                    <div className="col-span-5 md:col-span-5">Tx Hash</div>
+                    <div className="col-span-4 md:col-span-4">Block</div>
+                    <div className="col-span-3 md:col-span-3 text-right">Time</div>
                 </div>
 
-                {/* Pagination Controls */}
-                <div className="flex justify-between items-center mt-6 pt-4 border-t border-white/10">
-                    <div className="text-sm text-gray-500">
-                        Showing {from + 1}-{Math.min(to + 1, count || 0)} of {count}
-                    </div>
-                    <div className="flex gap-2">
-                        {page > 1 && (
-                            <Link
-                                href={`/transactions?page=${page - 1}`}
-                                className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded text-sm transition-colors"
-                            >
-                                Previous
-                            </Link>
-                        )}
-                        {page < totalPages && (
-                            <Link
-                                href={`/transactions?page=${page + 1}`}
-                                className="px-4 py-2 bg-white/5 hover:bg-white/10 rounded text-sm transition-colors"
-                            >
-                                Next
-                            </Link>
-                        )}
-                    </div>
+                <div className="divide-y divide-white/5">
+                    {txs?.map((tx) => (
+                        <div key={tx.id} className="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-white/5 transition-colors items-center group">
+                            <div className="col-span-5 md:col-span-5">
+                                <Link href={`/tx/${tx.id}`} className="block">
+                                    <div className="hidden md:block">
+                                        <HashBadge hash={tx.id} className="text-neon-blue hover:text-white" noCopy />
+                                    </div>
+                                    <div className="md:hidden font-mono text-neon-blue truncate text-sm">
+                                        {tx.id.substring(0, 10)}...
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="col-span-4 md:col-span-4">
+                                <Link href={`/block/${tx.block_index}`} className="flex items-center gap-2 text-gray-300 hover:text-neon-purple transition-colors font-mono text-sm">
+                                    <span className="text-neon-purple opacity-50">#</span>
+                                    {tx.block_index}
+                                </Link>
+                            </div>
+                            <div className="col-span-3 md:col-span-3 text-right text-gray-500 text-sm font-mono">
+                                {timeAgo(tx.timestamp * 1000)}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </GlassCard>
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between items-center pt-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+                <div className="text-sm text-gray-500 font-mono">
+                    Showing <span className="text-white">{from + 1}-{Math.min(to + 1, count || 0)}</span> of <span className="text-white">{count}</span>
+                </div>
+                <div className="flex gap-2">
+                    {page > 1 && (
+                        <Link
+                            href={`/transactions?page=${page - 1}`}
+                            className="px-4 py-2 glass-panel hover:bg-white/10 text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                            ← Previous
+                        </Link>
+                    )}
+                    {page < totalPages && (
+                        <Link
+                            href={`/transactions?page=${page + 1}`}
+                            className="px-4 py-2 glass-panel hover:bg-white/10 text-sm transition-all hover:-translate-y-0.5 active:translate-y-0"
+                        >
+                            Next →
+                        </Link>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

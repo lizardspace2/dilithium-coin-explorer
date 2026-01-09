@@ -43,7 +43,7 @@ export default async function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen p-8 max-w-7xl mx-auto space-y-12 pb-24 relative">
+    <div className="min-h-screen p-4 md:p-8 max-w-7xl mx-auto space-y-12 pb-24 relative">
 
       {/* Hero Section */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-end gap-6 animate-fade-in border-b border-white/5 pb-8">

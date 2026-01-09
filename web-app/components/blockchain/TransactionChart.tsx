@@ -87,24 +87,31 @@ export function TransactionChart() {
                                 <stop offset="95%" stopColor="#00f3ff" stopOpacity={0} />
                             </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" vertical={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
                         <XAxis
                             dataKey="date"
-                            stroke="#6b7280"
+                            stroke="#4b5563"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                         />
                         <YAxis
-                            stroke="#6b7280"
+                            stroke="#4b5563"
                             fontSize={12}
                             tickLine={false}
                             axisLine={false}
                         />
                         <Tooltip
-                            contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
+                            contentStyle={{
+                                backgroundColor: 'rgba(5, 5, 8, 0.9)',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: '12px',
+                                boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+                                backdropFilter: 'blur(8px)'
+                            }}
                             itemStyle={{ color: '#00f3ff' }}
-                            labelStyle={{ color: '#fff' }}
+                            labelStyle={{ color: '#9ca3af', marginBottom: '4px', fontSize: '12px' }}
+                            cursor={{ stroke: 'rgba(0, 243, 255, 0.2)', strokeWidth: 2 }}
                         />
                         <Area
                             type="monotone"

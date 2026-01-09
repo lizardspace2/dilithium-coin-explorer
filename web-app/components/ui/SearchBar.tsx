@@ -82,52 +82,63 @@ export function SearchBar() {
     };
 
     if (!open) return (
-        <button onClick={() => setOpen(true)} className="hidden md:flex items-center gap-2 text-sm text-gray-400 hover:text-white border border-white/10 px-4 py-2 rounded-full bg-white/5 transition-all hover:bg-white/10 hover:border-white/20">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <span>Search Blockchain...</span>
-            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-white/10 px-1.5 font-mono text-[10px] font-medium text-gray-400">
-                <span className="text-xs">Ctrl K</span>
-            </kbd>
-        </button>
+        <>
+            {/* Desktop Trigger */}
+            <button onClick={() => setOpen(true)} className="hidden md:flex items-center gap-2 text-sm text-gray-400 hover:text-white border border-white/10 px-4 py-2 rounded-full bg-white/5 transition-all hover:bg-white/10 hover:border-white/20">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>Search...</span>
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded bg-white/10 px-1.5 font-mono text-[10px] font-medium text-gray-400">
+                    <span className="text-xs">Ctrl K</span>
+                </kbd>
+            </button>
+
+            {/* Mobile Trigger */}
+            <button onClick={() => setOpen(true)} className="md:hidden flex items-center justify-center w-10 h-10 text-gray-400 hover:text-white rounded-full bg-white/5 border border-white/10 active:scale-95 transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+        </>
     );
 
     return (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-start justify-center pt-[20vh] animate-in fade-in duration-200" onClick={() => setOpen(false)}>
-            <div className="w-full max-w-2xl p-4" onClick={(e) => e.stopPropagation()}>
-                <form onSubmit={handleSearch} className="relative group">
-                    <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                        {loading ? (
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-neon-blue"></div>
-                        ) : (
-                            <svg className="h-5 w-5 text-gray-500 group-focus-within:text-neon-blue transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        )}
-                    </div>
-                    <input
-                        autoFocus
-                        type="text"
-                        placeholder="Search by Block Height, Hash, or Address..."
-                        className={`w-full bg-[#0a0a1a] border ${error ? 'border-red-500/50' : 'border-white/10 focus:border-neon-blue/50'} text-white rounded-2xl py-6 pl-12 pr-6 text-xl outline-none shadow-2xl transition-all placeholder:text-gray-600`}
-                        value={query}
-                        onChange={(e) => {
-                            setQuery(e.target.value);
-                            if (error) setError('');
-                        }}
-                    />
-                    {error && (
-                        <div className="absolute top-full left-0 mt-2 px-4 text-sm text-red-400 flex items-center gap-2 animate-in slide-in-from-top-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                            {error}
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-[20vh] animate-in fade-in duration-200" onClick={() => setOpen(false)}>
+            <div className="w-full max-w-2xl transform transition-all animate-in slide-in-from-top-4 duration-300" onClick={(e) => e.stopPropagation()}>
+                <div className="relative group p-[1px] rounded-2xl bg-gradient-to-r from-neon-blue/50 via-neon-purple/50 to-neon-blue/50 shadow-2xl shadow-neon-blue/20">
+                    <form onSubmit={handleSearch} className="relative bg-[#050508] rounded-2xl overflow-hidden">
+                        <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none z-10">
+                            {loading ? (
+                                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-neon-blue"></div>
+                            ) : (
+                                <svg className="h-5 w-5 text-gray-500 group-focus-within:text-neon-blue transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            )}
                         </div>
-                    )}
-                </form>
-                <div className="mt-8 grid grid-cols-2 gap-4 text-sm text-gray-500">
-                    <div className="p-4 rounded-xl border border-white/5 bg-white/5">
-                        <span className="block text-xs uppercase tracking-wider text-gray-600 mb-1">Enter</span>
-                        <span className="text-gray-300">to search</span>
+                        <input
+                            autoFocus
+                            type="text"
+                            placeholder="Search by Block Height, Hash, or Address..."
+                            className={`w-full bg-transparent border-none text-white text-xl py-6 pl-14 pr-6 outline-none placeholder:text-gray-600 font-light tracking-wide`}
+                            value={query}
+                            onChange={(e) => {
+                                setQuery(e.target.value);
+                                if (error) setError('');
+                            }}
+                        />
+                        {error && (
+                            <div className="absolute top-1/2 -translate-y-1/2 right-4 text-sm text-red-400 flex items-center gap-2 animate-in fade-in slide-in-from-right-2 bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                                {error}
+                            </div>
+                        )}
+                    </form>
+                </div>
+
+                <div className="mt-4 flex gap-3 justify-center opacity-0 animate-in fade-in slide-in-from-top-2 fill-mode-forwards delay-100">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/5 bg-white/[0.02] text-xs text-gray-500">
+                        <kbd className="font-mono bg-white/10 rounded px-1 text-gray-300">Enter</kbd>
+                        <span>to search</span>
                     </div>
-                    <div className="p-4 rounded-xl border border-white/5 bg-white/5">
-                        <span className="block text-xs uppercase tracking-wider text-gray-600 mb-1">Esc</span>
-                        <span className="text-gray-300">to close</span>
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/5 bg-white/[0.02] text-xs text-gray-500">
+                        <kbd className="font-mono bg-white/10 rounded px-1 text-gray-300">Esc</kbd>
+                        <span>to close</span>
                     </div>
                 </div>
             </div>
