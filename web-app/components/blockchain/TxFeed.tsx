@@ -41,17 +41,29 @@ export function TxFeed({ initialTxs }: { initialTxs: Transaction[] }) {
                     View All →
                 </Link>
             </div>
-            {txs.map((tx) => (
-                <div key={tx.id} className="glass-panel p-4 flex justify-between items-center hover:bg-white/5 transition-all animate-in fade-in slide-in-from-top-4 duration-500 border-l-2 border-l-transparent hover:border-l-neon-purple">
-                    <Link href={`/tx/${tx.id}`} className="font-mono text-neon-blue hover:text-neon-purple transition-colors">
-                        {tx.id.substring(0, 8)}...{tx.id.substring(tx.id.length - 8)}
-                    </Link>
-                    <div className="text-right">
-                        <div className="text-sm font-mono text-gray-400">Block #{tx.block_index}</div>
-                        <div className="text-xs text-gray-500">{timeAgo(tx.timestamp * 1000)}</div>
+            <div className="glass-panel p-1">
+                {txs.map((tx, i) => (
+                    <div key={tx.id} className={`p-4 flex justify-between items-center hover:bg-white/5 transition-all duration-200 border-b border-white/5 last:border-0 ${i === 0 ? 'bg-white/[0.02]' : ''}`}>
+                        <div className="flex items-center gap-4">
+                            <div className="hidden sm:flex h-10 w-10 rounded-lg bg-neon-purple/10 items-center justify-center text-neon-purple">
+                                <span className="font-bold text-lg">Tx</span>
+                            </div>
+                            <div>
+                                <Link href={`/tx/${tx.id}`} className="font-mono text-neon-blue hover:text-neon-purple transition-colors block text-sm sm:text-base">
+                                    {tx.id.substring(0, 8)}...{tx.id.substring(tx.id.length - 8)}
+                                </Link>
+                                <div className="text-xs text-gray-500 mt-0.5">
+                                    Block #{tx.block_index}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="text-right">
+                            <div className="text-sm font-medium text-gray-300">Success</div>
+                            <div className="text-xs text-gray-600 font-mono mt-0.5">{timeAgo(tx.timestamp * 1000)}</div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }
